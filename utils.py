@@ -1,3 +1,5 @@
+import subprocess
+
 class SessionAction(object):
 
     @classmethod
@@ -11,7 +13,22 @@ class SessionAction(object):
     @classmethod
     def power_off(cls):
         return 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.PowerOff boolean:false'
-    
+
     @classmethod
     def suspend(cls):
         return 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.Suspend boolean:false'
+
+    @classmethod
+    def toggle_dnd(cls):
+        dnd_state = cls._get_dnd_state()
+        if dnd_state:
+            return 'gsettings set org.pantheon.desktop.gala.notifications do-not-disturb false'
+        else:
+            return 'gsettings set org.pantheon.desktop.gala.notifications do-not-disturb true'
+
+
+    @staticmethod
+    def _get_dnd_state():
+        schema_name = "org.pantheon.desktop.gala.notifications"
+        dnd_key = "do-not-disturb"
+        return subprocess.check_output(["gsettings", "get",schema_name , dnd_key])[:-1] == 'true'

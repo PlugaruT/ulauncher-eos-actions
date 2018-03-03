@@ -15,14 +15,15 @@ class ElementarySessionExtension(Extension):
 class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
-        options = ['restart', 'reboot', 'shutdown', 'power-off', 'lock', 'suspend', 'sleep']        
+        options = ['dnd', 'lock', 'suspend', 'sleep', 'restart', 'reboot', 'shutdown', 'power-off',]
         actions = []
         my_list = event.query.split(" ")
         if len(my_list) == 1:
-            actions.append(reboot_item())
-            actions.append(shutdown_item())
+            actions.append(dnd_item())
             actions.append(lock_screen_item())
             actions.append(suspend_item())
+            actions.append(reboot_item())
+            actions.append(shutdown_item())
             return RenderResultListAction(actions)
         else:
             my_query = my_list[1]
@@ -41,6 +42,9 @@ class KeywordQueryEventListener(EventListener):
                     elif option in ['lock']:
                         actions.append(lock_screen_item())
                         included.append('lock')
+                    elif option in ['dnd']:
+                        actions.append(dnd_item())
+                        included.append('dnd')
 
             return RenderResultListAction(actions)
 
@@ -68,6 +72,12 @@ def suspend_item():
                                name='Suspend',
                                description='Suspend session',
                                on_enter=RunScriptAction(SessionAction.suspend(), None))
+
+def dnd_item():
+    return ExtensionResultItem(icon='images/system-notifications.svg',
+                               name='DND',
+                               description='Toogle DND mode',
+                               on_enter=RunScriptAction(SessionAction.toggle_dnd(), None))
 
 if __name__ == '__main__':
     ElementarySessionExtension().run()
