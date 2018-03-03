@@ -4,7 +4,7 @@
   "name": "Exit Elementary",
   "description": "Suspend / Reboot / Shutdown / Lock functions for Elementary OS.",
   "developer_name": "Tudor Plugaru",
-  "icon": "images/system-shutdown.png",
+  "icon": "images/system-shutdown.svg",
   "options": {
     "query_debounce": 0.1
   },
