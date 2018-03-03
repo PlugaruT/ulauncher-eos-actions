@@ -18,7 +18,6 @@ class KeywordQueryEventListener(EventListener):
         options = ['restart', 'reboot', 'shutdown', 'power-off', 'lock', 'suspend', 'sleep']        
         actions = []
         my_list = event.query.split(" ")
-        print(my_list)
         if len(my_list) == 1:
             actions.append(reboot_item())
             actions.append(shutdown_item())
