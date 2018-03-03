@@ -6,4 +6,6 @@ All actions are performed using [`dbus-send`](https://dbus.freedesktop.org/doc/d
 
 Icons are part of the [elementary icons](https://github.com/elementary/icons).
 
-This extension was inspired by [Exit Gnome](https://github.com/leinardi/ulauncher-exit-gnome).
+_This extention may work on other desktop enviroments too because it uses d-bus interface to perform all the actions. But I haven't tested it._
+
+_This extension was inspired by [Exit Gnome](https://github.com/leinardi/ulauncher-exit-gnome)._
