@@ -1,8 +1,8 @@
 {
   "manifest_version": "1",
   "api_version": "1",
-  "name": "Exit Elementary",
-  "description": "Suspend / Reboot / Shutdown / Lock functions for Elementary OS.",
+  "name": "Elementary Actions",
+  "description": "Perform different actions on Elementary OS.",
   "developer_name": "Tudor Plugaru",
   "icon": "images/system-shutdown.svg",
   "options": {
@@ -12,8 +12,8 @@
     {
       "id": "oes_session_exit",
       "type": "keyword",
-      "name": "Exit Elementary",
-      "description": "Suspend / Reboot / Shutdown / Lock functions for Elementary OS.",
+      "name": "Elementary Actions",
+      "description": "Perform different actions on Elementary OS.",
       "default_value": "eos"
     }
   ]
