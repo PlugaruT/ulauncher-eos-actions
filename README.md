@@ -9,7 +9,7 @@ Actions are performed using [`dbus-send`](https://dbus.freedesktop.org/doc/dbus-
  - `Lock` computer. Search strings: _lock_
  - `DND`, toggle Do Not Disturb mode. Search strings: _dnd_
 
-![screenshot](https://i.imgur.com/0JAUMvw.png)
+![screenshot](images/screenshot.png)
 
 Icons are part of the [elementary icons](https://github.com/elementary/icons).
 
