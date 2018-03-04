@@ -6,6 +6,7 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
 from utils import SessionAction
 
+
 class ElementarySessionExtension(Extension):
     def __init__(self):
         super(ElementarySessionExtension, self).__init__()
@@ -15,7 +16,7 @@ class ElementarySessionExtension(Extension):
 class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
-        options = ['dnd', 'lock', 'suspend', 'sleep', 'restart', 'reboot', 'shutdown', 'power-off',]
+        options = ['dnd', 'lock', 'suspend', 'sleep', 'restart', 'reboot', 'shutdown', 'power-off', ]
         actions = []
         my_list = event.query.split(" ")
         if len(my_list) == 1:
@@ -55,11 +56,13 @@ def reboot_item():
                                description='Reboot computer',
                                on_enter=RunScriptAction(SessionAction.reboot(), None))
 
+
 def shutdown_item():
     return ExtensionResultItem(icon='images/system-shutdown.svg',
                                name='Shutdown',
                                description='Power off computer',
                                on_enter=RunScriptAction(SessionAction.power_off(), None))
+
 
 def lock_screen_item():
     return ExtensionResultItem(icon='images/system-lock-screen.svg',
@@ -67,17 +70,26 @@ def lock_screen_item():
                                description='Lock screen',
                                on_enter=RunScriptAction(SessionAction.lock(), None))
 
+
 def suspend_item():
     return ExtensionResultItem(icon='images/system-suspend.svg',
                                name='Suspend',
                                description='Suspend session',
                                on_enter=RunScriptAction(SessionAction.suspend(), None))
 
+
 def dnd_item():
-    return ExtensionResultItem(icon='images/system-notifications.svg',
-                               name='DND',
-                               description='Toogle DND mode',
-                               on_enter=RunScriptAction(SessionAction.toggle_dnd(), None))
+    if SessionAction.get_dnd_state():
+        return ExtensionResultItem(icon='images/system-notifications.svg',
+                                   name='DND off',
+                                   description='Turn off DND mode',
+                                   on_enter=RunScriptAction(SessionAction.dnd_off(), None))
+    else:
+        return ExtensionResultItem(icon='images/system-notifications.svg',
+                                   name='DND on',
+                                   description='Turn on DND mode',
+                                   on_enter=RunScriptAction(SessionAction.dnd_on(), None))
+
 
 if __name__ == '__main__':
     ElementarySessionExtension().run()
