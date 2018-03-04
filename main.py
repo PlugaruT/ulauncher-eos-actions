@@ -81,12 +81,12 @@ def suspend_item():
 def dnd_item():
     if SessionAction.get_dnd_state():
         return ExtensionResultItem(icon='images/system-notifications.svg',
-                                   name='DND off',
+                                   name='Disable DND',
                                    description='Turn off DND mode',
                                    on_enter=RunScriptAction(SessionAction.dnd_off(), None))
     else:
         return ExtensionResultItem(icon='images/system-notifications.svg',
-                                   name='DND on',
+                                   name='Enable DND',
                                    description='Turn on DND mode',
                                    on_enter=RunScriptAction(SessionAction.dnd_on(), None))
 
