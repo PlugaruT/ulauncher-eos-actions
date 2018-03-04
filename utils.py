@@ -8,6 +8,10 @@ class SessionAction(object):
         return 'dbus-send --session --type=method_call --dest=org.freedesktop.ScreenSaver /org/freedesktop/ScreenSaver org.freedesktop.ScreenSaver.Lock uint32:1'
 
     @classmethod
+    def logout(cls):
+        return 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/user/self org.freedesktop.login1.User.Terminate'
+
+    @classmethod
     def reboot(cls):
         return 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.Reboot boolean:false'
 
@@ -27,8 +31,26 @@ class SessionAction(object):
     def dnd_off(cls):
         return 'gsettings set org.pantheon.desktop.gala.notifications do-not-disturb false'
 
+    @classmethod
+    def show_battery_percentage(cls):
+        return 'gsettings set org.pantheon.desktop.wingpanel.indicators.power show-percentage true'
+
+    @classmethod
+    def hide_battery_percentage(cls):
+        return 'gsettings set org.pantheon.desktop.wingpanel.indicators.power show-percentage false'
+
+    @classmethod
+    def get_dnd_state(cls):
+        schema_name = 'org.pantheon.desktop.gala.notifications'
+        dnd_key = 'do-not-disturb'
+        return cls._get_state(schema_name, dnd_key)
+
+    @classmethod
+    def get_battery_percentage_state(cls):
+        schema_name = 'org.pantheon.desktop.wingpanel.indicators.power'
+        battery_percentage_key = 'show-percentage'
+        return cls._get_state(schema_name, battery_percentage_key)
+
     @staticmethod
-    def get_dnd_state():
-        schema_name = "org.pantheon.desktop.gala.notifications"
-        dnd_key = "do-not-disturb"
-        return subprocess.check_output(["gsettings", "get", schema_name, dnd_key])[:-1] == 'true'
+    def _get_state(schema_name, key):
+        return subprocess.check_output(["gsettings", "get", schema_name, key])[:-1] == 'true'

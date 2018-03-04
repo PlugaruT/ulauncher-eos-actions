@@ -7,7 +7,9 @@ Actions are performed using [`dbus-send`](https://dbus.freedesktop.org/doc/dbus-
  - `Restart` computer. Search strings: _reboot_, _restart_
  - `PowerOff` computer. Search strings: _shutdown_, _power-off_
  - `Lock` computer. Search strings: _lock_
+ - `LogOut` from current sesstion. Search string: _logout_
  - `DND`, toggle Do Not Disturb mode. Search strings: _dnd_
+ - `Show/Hide battery %`,  toggle battery percentage. Search string: _battery_
 
 ![screenshot](images/screenshot.png)
 
